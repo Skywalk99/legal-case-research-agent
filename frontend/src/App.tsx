@@ -12,7 +12,7 @@ export default function App() {
   const research = useLegalResearchRun();
   const cases = casesFromState(research.state);
   return <main className="workspace">
-    <header className="topbar"><div><p className="eyebrow">LEGAL CASE RESEARCH AGENT · LEGAL_SEARCH</p><h1>中国司法案例研究工作台</h1></div><div className={`status status-${research.phase}`}>{phaseText[research.phase]}{research.threadId ? <small>Thread: {research.threadId.slice(0, 8)}…{research.lastHeartbeat ? " · SSE 已连接" : ""}</small> : null}</div></header>
+    <header className="topbar"><div><p className="eyebrow">CHINA LEGAL CASE RESEARCH AGENT</p><h1>中国司法案例研究智能体</h1></div><div className={`status status-${research.phase}`}>{phaseText[research.phase]}{research.threadId ? <small>Thread: {research.threadId.slice(0, 8)}…{research.lastHeartbeat ? " · SSE 已连接" : ""}</small> : null}</div></header>
     {research.error ? <div className="error-banner" role="alert">后端返回错误：{research.error}</div> : null}
     <div className="workspace-grid">
       <ResearchPlanPanel plan={research.state.plan} />

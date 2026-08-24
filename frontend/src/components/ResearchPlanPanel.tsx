@@ -4,7 +4,7 @@ const symbol = { done: "✓", in_progress: "●", pending: "○" };
 
 export function ResearchPlanPanel({ plan }: { plan?: PlanItem[] }) {
   return <section className="panel plan-panel">
-    <div className="panel-heading"><span>研究计划</span><small>来自 Agent State</small></div>
+    <div className="panel-heading"><span>研究计划</span></div>
     {plan?.length ? <ol className="plan-list">
       {plan.map((item) => <li key={item.content} className={`plan-${item.status}`}>
         <span aria-hidden>{symbol[item.status]}</span><span>{item.content}</span>

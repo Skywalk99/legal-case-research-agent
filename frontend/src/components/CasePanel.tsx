@@ -2,7 +2,7 @@ import type { CaseSummary } from "../types/langgraph";
 
 export function CasePanel({ cases, notes }: { cases: CaseSummary[]; notes?: Record<string, string> }) {
   return <section className="panel material-panel">
-    <div className="panel-heading"><span>案例 / 研究资料</span><small>来自工具与 State</small></div>
+    <div className="panel-heading"><span>案例 / 研究资料</span></div>
     <div className="materials">
       <h3>检索案例</h3>
       {cases.length ? cases.map((item, index) => <article className="case-card" key={item.case_id ?? item.case_number ?? index}>
