@@ -1,0 +1,12 @@
+flowchart TD
+    U[User] --> F[React + Vite Frontend<br/>127.0.0.1:5173]
+    F -->|HTTP + SSE through /api proxy| API[LangGraph Local API<br/>127.0.0.1:8000]
+    API --> G[legal_search Graph]
+    G --> M[Main Agent / call_model]
+    M --> S[SubAgent Subgraph]
+    M --> MT[Plan and Note ToolNode]
+    S --> ST[Research ToolNode]
+    S --> WS[Write Note + Summary Subgraph]
+    ST --> D[得理法律平台 API]
+    M -. reads and updates .-> STATE[(LangGraph State<br/>messages / plan / note)]
+    S -. reads and updates .-> STATE

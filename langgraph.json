@@ -1,0 +1,10 @@
+{
+    "dependencies": [
+        "."
+    ],
+    "graphs": {
+        "legal_search": "./src/agent/graph.py:build_graph"
+    }
+}
+
+

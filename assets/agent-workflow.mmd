@@ -1,0 +1,18 @@
+flowchart TD
+    START([START]) --> MAIN[call_model<br/>Main Agent]
+    MAIN -->|write_plan / update_plan / ls / query_note| TOOLS[tools ToolNode]
+    TOOLS --> MAIN
+    MAIN -->|transfor_task_to_subagent| SUB[subagent subgraph]
+
+    SUB --> SUBMODEL[subagent_call_model]
+    SUBMODEL -->|query_note / search_legal_cases / get_case_detail| SUBTOOLS[sub_tools ToolNode]
+    SUBTOOLS --> SUBMODEL
+    SUBMODEL -->|write_note| WAS[write_and_summary subgraph]
+    WAS --> WRITE[write note]
+    WAS --> SUMMARY[generate ToolMessage summary]
+    WRITE --> SUBEND([Subgraph END])
+    SUMMARY --> SUBEND
+    SUBMODEL -->|no tool call| SUBEND
+
+    SUBEND --> MAIN
+    MAIN -->|no tool call / final response| END([END])

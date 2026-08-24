@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1080" viewBox="0 0 1200 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Legal Case Research Agent workflow</title>
+  <desc id="desc">The Main Agent executes planning and note tools, delegates a legal research task to the SubAgent, or returns a final answer. The SubAgent loops through research tools, then writes a note and generates a summary before returning control to the Main Agent.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#486581"/>
+    </marker>
+    <style>
+      .background{fill:#f7f9fc}
+      .lane{fill:#ffffff;stroke:#bcccdc;stroke-width:1.5}
+      .agent{fill:#e8f1fb;stroke:#2673b8;stroke-width:2}
+      .tool{fill:#f3edff;stroke:#7656b5;stroke-width:2}
+      .nested{fill:#fff3df;stroke:#c47b12;stroke-width:2}
+      .terminal{fill:#e7f7ef;stroke:#27845a;stroke-width:2}
+      .line{fill:none;stroke:#486581;stroke-width:2;marker-end:url(#arrow)}
+      .return{fill:none;stroke:#27845a;stroke-width:2;stroke-dasharray:8 6;marker-end:url(#arrow)}
+      .title{font:500 26px Arial,"Microsoft YaHei",sans-serif;fill:#102a43;text-anchor:middle}
+      .lane-title{font:500 17px Arial,"Microsoft YaHei",sans-serif;fill:#334e68}
+      .label{font:500 16px Arial,"Microsoft YaHei",sans-serif;fill:#243b53;text-anchor:middle}
+      .small{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#486581;text-anchor:middle}
+      .edge{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#486581;text-anchor:middle}
+      .return-label{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#27845a;text-anchor:middle}
+    </style>
+  </defs>
+
+  <rect class="background" width="1200" height="1080" rx="16"/>
+  <text class="title" x="600" y="40">Legal Case Research Agent · Agent Workflow</text>
+
+  <!-- Main graph lane -->
+  <rect class="lane" x="35" y="65" width="1130" height="285" rx="14"/>
+  <text class="lane-title" x="60" y="94">Main Graph</text>
+
+  <rect class="terminal" x="510" y="88" width="180" height="54" rx="27"/>
+  <text class="label" x="600" y="121">START</text>
+
+  <path class="line" d="M600 142 V180"/>
+  <rect class="agent" x="450" y="180" width="300" height="78" rx="12"/>
+  <text class="label" x="600" y="213">call_model</text>
+  <text class="small" x="600" y="237">Main Agent</text>
+
+  <path class="line" d="M450 219 H330"/>
+  <text class="edge" x="390" y="204">plan / note tool call</text>
+  <rect class="tool" x="70" y="180" width="260" height="78" rx="12"/>
+  <text class="label" x="200" y="211">tools ToolNode</text>
+  <text class="small" x="200" y="235">write/update plan · ls/query note</text>
+
+  <path class="line" d="M200 180 V130 H450 V195"/>
+  <text class="edge" x="335" y="119">tool result → Main Agent</text>
+
+  <path class="line" d="M750 219 H870"/>
+  <text class="edge" x="810" y="204">final response</text>
+  <rect class="terminal" x="870" y="180" width="250" height="78" rx="39"/>
+  <text class="label" x="995" y="213">GRAPH END</text>
+  <text class="small" x="995" y="237">final assistant answer</text>
+
+  <path class="line" d="M600 258 V315"/>
+  <text class="edge" x="730" y="291">transfor_task_to_subagent</text>
+
+  <!-- SubAgent lane -->
+  <rect class="lane" x="35" y="375" width="1130" height="650" rx="14"/>
+  <text class="lane-title" x="60" y="406">SubAgent Subgraph</text>
+
+  <rect class="agent" x="450" y="415" width="300" height="72" rx="12"/>
+  <text class="label" x="600" y="445">subagent</text>
+  <text class="small" x="600" y="468">delegated task entry</text>
+
+  <path class="line" d="M600 487 V535"/>
+  <rect class="agent" x="450" y="535" width="300" height="78" rx="12"/>
+  <text class="label" x="600" y="568">subagent_call_model</text>
+  <text class="small" x="600" y="592">analyze task and choose action</text>
+
+  <!-- Research tool loop, kept entirely on the left -->
+  <path class="line" d="M450 574 H330"/>
+  <text class="edge" x="390" y="555">query / search / detail</text>
+  <rect class="tool" x="70" y="535" width="260" height="78" rx="12"/>
+  <text class="label" x="200" y="567">sub_tools ToolNode</text>
+  <text class="small" x="200" y="591">query note · case search · detail</text>
+
+  <path class="line" d="M200 613 V655 H390 V598 H450"/>
+  <text class="edge" x="300" y="676">tool result → continue research</text>
+
+  <!-- Note and summary path, centered vertically -->
+  <path class="line" d="M600 613 V690"/>
+  <text class="edge" x="655" y="657">write_note</text>
+  <rect class="nested" x="425" y="690" width="350" height="76" rx="12"/>
+  <text class="label" x="600" y="721">write_and_summary subgraph</text>
+  <text class="small" x="600" y="745">two parallel branches</text>
+
+  <path class="line" d="M515 766 V825"/>
+  <path class="line" d="M685 766 V825"/>
+
+  <rect class="tool" x="350" y="825" width="250" height="72" rx="12"/>
+  <text class="label" x="475" y="857">write note</text>
+  <text class="small" x="475" y="880">update State note</text>
+
+  <rect class="tool" x="620" y="825" width="250" height="72" rx="12"/>
+  <text class="label" x="745" y="857">generate summary</text>
+  <text class="small" x="745" y="880">create ToolMessage</text>
+
+  <path class="line" d="M475 897 V950 H565"/>
+  <path class="line" d="M745 897 V950 H635"/>
+  <rect class="terminal" x="565" y="925" width="70" height="50" rx="25"/>
+  <text class="label" x="600" y="956">END</text>
+
+  <!-- No-tool exit stays on the right and joins the same end -->
+  <path class="line" d="M750 574 H930 V950 H635"/>
+  <text class="edge" x="872" y="558">no tool call</text>
+
+  <!-- Return loop runs only around the outer right edge -->
+  <path class="return" d="M635 950 H1115 V315 H750 V238"/>
+  <text class="return-label" x="1050" y="1000">SubAgent END → return control to Main Agent</text>
+</svg>

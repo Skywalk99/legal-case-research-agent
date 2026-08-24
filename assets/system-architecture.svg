@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Legal Case Research Agent system architecture</title>
+  <desc id="desc">The user accesses a React frontend, which communicates with the LangGraph API and legal_search graph. The Main Agent delegates work to the SubAgent and tool nodes. Research tools call the Deli Legal Platform API, while both agents update LangGraph State.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#486581"/></marker>
+    <style>
+      .bg{fill:#f7f9fc}.node{fill:#fff;stroke:#829ab1;stroke-width:2}.agent{fill:#e8f1fb;stroke:#2673b8;stroke-width:2}.tool{fill:#f3edff;stroke:#7656b5;stroke-width:2}.external{fill:#fff3df;stroke:#c47b12;stroke-width:2}.state{fill:#e7f7ef;stroke:#27845a;stroke-width:2}.line{fill:none;stroke:#486581;stroke-width:2;marker-end:url(#arrow)}.dash{stroke-dasharray:7 6}.label{font:500 16px Arial,"Microsoft YaHei",sans-serif;fill:#243b53;text-anchor:middle}.small{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#486581;text-anchor:middle}.heading{font:600 26px Arial,"Microsoft YaHei",sans-serif;fill:#102a43;text-anchor:middle}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760" rx="16"/>
+  <text class="heading" x="600" y="42">Legal Case Research Agent · System Architecture</text>
+
+  <path class="line" d="M170 115 H275"/><path class="line" d="M470 115 H570"/><path class="line" d="M770 115 H870"/>
+  <rect class="node" x="40" y="80" width="130" height="70" rx="12"/><text class="label" x="105" y="121">User</text>
+  <rect class="node" x="275" y="70" width="195" height="90" rx="12"/><text class="label" x="372" y="108">React + Vite</text><text class="small" x="372" y="133">127.0.0.1:5173</text>
+  <text class="small" x="520" y="98">HTTP + SSE</text><text class="small" x="520" y="119">/api proxy</text>
+  <rect class="node" x="570" y="70" width="200" height="90" rx="12"/><text class="label" x="670" y="108">LangGraph API</text><text class="small" x="670" y="133">127.0.0.1:8000</text>
+  <rect class="agent" x="870" y="80" width="250" height="70" rx="12"/><text class="label" x="995" y="121">legal_search Graph</text>
+
+  <path class="line" d="M995 150 V215"/>
+  <rect class="agent" x="850" y="215" width="290" height="80" rx="12"/><text class="label" x="995" y="250">Main Agent</text><text class="small" x="995" y="273">call_model</text>
+
+  <path class="line" d="M850 255 H670"/><path class="line" d="M995 295 V365"/>
+  <rect class="tool" x="430" y="215" width="240" height="80" rx="12"/><text class="label" x="550" y="250">Plan and Note ToolNode</text><text class="small" x="550" y="274">write/update plan · ls/query note</text>
+  <rect class="agent" x="850" y="365" width="290" height="80" rx="12"/><text class="label" x="995" y="400">SubAgent Subgraph</text><text class="small" x="995" y="423">legal research execution</text>
+
+  <path class="line" d="M850 405 H670"/><path class="line" d="M995 445 V515"/>
+  <rect class="tool" x="410" y="365" width="260" height="80" rx="12"/><text class="label" x="540" y="400">Research ToolNode</text><text class="small" x="540" y="423">search cases · case detail</text>
+  <rect class="tool" x="840" y="515" width="310" height="80" rx="12"/><text class="label" x="995" y="550">Write Note + Summary</text><text class="small" x="995" y="573">parallel nested subgraph</text>
+
+  <path class="line" d="M410 405 H235"/>
+  <rect class="external" x="35" y="365" width="200" height="80" rx="12"/><text class="label" x="135" y="400">得理法律平台 API</text><text class="small" x="135" y="423">case list · case info</text>
+
+  <path class="line dash" d="M850 270 C760 315 760 600 650 650"/><path class="line dash" d="M850 415 C760 460 760 625 650 660"/>
+  <rect class="state" x="360" y="625" width="290" height="90" rx="45"/><text class="label" x="505" y="662">LangGraph State</text><text class="small" x="505" y="686">messages · plan · note</text>
+  <text class="small" x="745" y="610">reads and updates</text>
+</svg>
